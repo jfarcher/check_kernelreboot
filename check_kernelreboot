@@ -1,0 +1,18 @@
+#!/bin/bash
+# script : check_kernelreboot
+# version : 1
+# Comment : Script to check RHEL based servers are running the latest installed kernel
+OUT=`/usr/bin/needs-restarting -r >/dev/null; echo $?`
+if [ $OUT = "0" ]
+then 
+	LINE="OK - Current kernel loaded"
+	echo $LINE
+	exit 0
+elif [ $OUT = "1" ]
+then
+	LINE="WARNING - reboot required"
+	echo $LINE
+	exit 1
+fi
+
+
